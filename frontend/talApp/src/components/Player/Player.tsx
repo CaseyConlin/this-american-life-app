@@ -1,8 +1,6 @@
 import { useState, useRef, useCallback, ChangeEvent } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 
-import { EqualizerGraphics } from "./ActInfo/EqualizerGraphics";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
@@ -17,9 +15,6 @@ import Replay10RoundedIcon from "@mui/icons-material/Replay10Rounded";
 import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 import VolumeDownRounded from "@mui/icons-material/VolumeDownRounded";
 
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 // import ListItemText from "@mui/material/ListItemText";
 // import Collapse from "@mui/material/Collapse";
 
@@ -31,7 +26,6 @@ import icon from "../../assets/talicon.webp";
 // import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 // import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 
-import Chip from "@mui/material/Chip";
 import { Grid } from "@mui/material";
 import { CoverImage } from "./CoverImage";
 import { ActInfoContainer } from "./ActInfo/ActInfoContainer";
@@ -272,8 +266,7 @@ export default function MusicPlayerSlider(props: EpisodeProps) {
   // }, []);
   //
   //
-  //
-  const [open, setOpen] = useState(false);
+  // [open, setOpen] = useState(false);
 
   // const handleClick = () => {
   //   setOpen(!open);
