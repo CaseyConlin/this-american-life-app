@@ -2,7 +2,7 @@ import "./App.css";
 import MusicPlayerSlider from "./components/Player/Player";
 import BottomAppBar from "./components/AppBar/AppBar";
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { EpisodeProps } from "./components/Player/Player";
 import SwipeableTemporaryDrawer from "./components/Drawer";
 import { fetchEpisode, fetchEpisodes } from "./Services/episodes";
@@ -61,11 +61,11 @@ function App() {
     //   });
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/episodes/")
-      .then((res) => console.log(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8000/api/episodes/")
+  //     .then((res) => console.log(res.data));
+  // }, []);
 
   useEffect(() => {
     fetchEpisodes().then((res) => {

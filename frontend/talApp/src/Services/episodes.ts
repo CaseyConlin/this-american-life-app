@@ -12,9 +12,7 @@ export interface EpisodeResponseProps {
 
 export const fetchEpisode = (epNumber: string) => {
   const newEpisode = axios
-    .get<EpisodeResponseProps>(
-      `http://localhost:8000/api/episodes/${epNumber}/`
-    )
+    .get<EpisodeResponseProps>(`/api/episodes/${epNumber}/`)
     .then((res) => {
       const episode: EpisodeProps = {
         epNum: res.data.episode_num,
@@ -31,7 +29,7 @@ export const fetchEpisode = (epNumber: string) => {
 
 export const fetchEpisodes = () => {
   const episodesList = axios
-    .get<EpisodeResponseProps[]>("http://localhost:8000/api/episodes/")
+    .get<EpisodeResponseProps[]>("/api/episodes/")
     .then((res) => {
       const mappedEpisodeList = res.data.map((ep: EpisodeResponseProps) => {
         const episode: EpisodeProps = {
