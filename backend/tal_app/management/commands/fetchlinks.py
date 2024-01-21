@@ -6,12 +6,14 @@ import requests
 from time import sleep
 import json
 from datetime import datetime 
-
+from requests_ip_rotator import ApiGateway, EXTRA_REGIONS
+import os
+from dotenv import load_dotenv
 
 
 
 class Command(BaseCommand):
-    help = "Closes the specified poll for voting"
+    help = "Fetch episode links from url api"
 
     # def add_arguments(self, parser):
     #     parser.add_argument("poll_ids", nargs="+", type=int)
@@ -44,7 +46,17 @@ class Command(BaseCommand):
             cleanLinks = []
             endSearch = False
             while endSearch != True:
-                response = requests.get(url+str(pageNumber))
+
+                AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+                AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+
+                gateway = ApiGateway('https://www.thisamericanlife.org', access_key_id= AWS_ACCESS_KEY_ID, access_key_secret=AWS_SECRET_ACCESS_KEY)
+                gateway.start()
+                session = requests.Session()
+                session.mount('https://www.thisamericanlife.org', gateway)
+
+                response = session.get(url+str(pageNumber))
+                # response = requests.get(url+str(pageNumber))
                 data = response.text
                 soup = BeautifulSoup(data, 'html.parser', multi_valued_attributes=None)
 
@@ -68,13 +80,13 @@ class Command(BaseCommand):
                 ep_number = link.split('/')[1]
 
                 newLink = link
-
+                print(newLink)
                 cleanLinks.append([int(ep_number),newLink])
 
             # sortedLinks = sorted(links)
             # print(sortedLinks)
             cleanLinks.sort()
-            # print(cleanLinks)
+            print(cleanLinks)
     
             for link in cleanLinks:
                 # print(link[0], link[1])

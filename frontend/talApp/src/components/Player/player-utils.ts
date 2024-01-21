@@ -1,3 +1,7 @@
+export const createMarkup = (html: string) => {
+  return { __html: html };
+};
+
 export const equalizerKeyFrames = {
   "0%": {
     height: "60%",

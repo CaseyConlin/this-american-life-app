@@ -4,14 +4,14 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 
-import IconButton from "@mui/material/IconButton";
+// import IconButton from "@mui/material/IconButton";
 // import Fab from "@mui/material/Fab";
 
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
 
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 // import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { FloatingButton } from "./FloatingButton";
 
 export interface NavProps {
@@ -39,9 +39,9 @@ export default function BottomAppBar(props: NavProps) {
         sx={{ top: "auto", bottom: 0, zIndex: "10" }}
       >
         <Toolbar>
-          <IconButton color="inherit" aria-label="open drawer">
+          {/* <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <FloatingButton action={props.action} epsLoading={props.epsLoading} />
           {/* <StyledFab
             color="secondary"
@@ -51,12 +51,12 @@ export default function BottomAppBar(props: NavProps) {
             <PlaylistPlayIcon />
           </StyledFab> */}
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <SearchIcon />
           </IconButton>
           <IconButton color="inherit">
             <AccountCircleIcon />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
     </>

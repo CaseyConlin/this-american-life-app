@@ -47,7 +47,7 @@ function App() {
     if (open) {
       setEpsLoading(true);
       fetchEpisodes().then((res) => {
-        setEpisodes(res.reverse());
+        setEpisodes(res);
         setEpsLoading(false);
         setDrawerOpen(true);
       });
@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     fetchEpisodes().then((res) => {
-      playEpisodeHandler(res[res.length - 1].epNum);
+      playEpisodeHandler(res[1].epNum);
     });
     // axios.get("http://localhost:8000/api/episodes/555/").then((res) =>
     //   setEpisode({
@@ -87,6 +87,7 @@ function App() {
 
   const playEpisodeHandler = (epNum: string) => {
     // .get("http://localhost:8000/api/episodes/")
+    console.log(epNum);
     fetchEpisode(epNum).then((res) => {
       setEpisode(res);
     });

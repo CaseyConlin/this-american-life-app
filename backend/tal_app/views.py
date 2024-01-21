@@ -13,6 +13,10 @@ from .models import Episode
 class TALView(viewsets.ModelViewSet):
     serializer_class = EpisodeSerializer
     queryset = Episode.objects.all()
+    lookup_field = 'episode_num'
+
+
+
 
 # def index(request):
 #   return render(request, 'public/index.html')

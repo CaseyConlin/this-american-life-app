@@ -39,9 +39,14 @@ export default function SwipeableTemporaryDrawer(props: DrawerProps) {
           </IconButton>
           {props.episodeList
             ? props.episodeList.map((episode) => {
-                console.log(episode);
+                // console.log(episode);
                 return (
-                  <button onClick={() => props.episodeLoader(episode.epNum)}>
+                  <button
+                    onClick={() => {
+                      console.log(episode);
+                      props.episodeLoader(episode.epNum);
+                    }}
+                  >
                     {episode.epNum} - {episode.epDate} {episode.title}{" "}
                     {episode.desc}
                   </button>

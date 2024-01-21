@@ -4,5 +4,7 @@ from .models import Episode, Episode_Link
 class EpisodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Episode
+
+        # episode_acts = serializers.JSONField(allow_null=True, required=False)
         # fields = ('episode_num', 'episode_title', 'episode_date', 'episode_audio_url', 'episode_descript', 'episode_acts')
         fields = ('episode_num', 'episode_title', 'episode_date', 'episode_audio_url', 'episode_descript', 'episode_acts')
