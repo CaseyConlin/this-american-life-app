@@ -87,7 +87,6 @@ function App() {
 
   const playEpisodeHandler = (epNum: string) => {
     // .get("http://localhost:8000/api/episodes/")
-    console.log(epNum);
     fetchEpisode(epNum).then((res) => {
       setEpisode(res);
     });
@@ -104,7 +103,7 @@ function App() {
     // );
     setDrawerOpen(false);
   };
-  console.log(episode);
+
   // const episode1 = {
   //   epNum: "447",
   //   epDate: "Mar. 22, 2013",

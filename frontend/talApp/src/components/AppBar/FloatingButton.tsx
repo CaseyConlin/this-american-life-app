@@ -17,15 +17,27 @@ export const FloatingButton = (props: FloatingButtonProps) => {
     left: 0,
     right: 0,
     margin: "0 auto",
+    "& .MuiSvgIcon-root:hover ": {
+      backgroundColor: "#02135b",
+    },
+    "&.MuiFab-root:hover": {
+      backgroundColor: "#02135b",
+      filter: "brightness(85%)",
+    },
   });
 
   return (
     <StyledFab
       color="secondary"
       aria-label="add"
+      sx={{ backgroundColor: "#02135b", color: "#fff" }}
       onClick={() => props.action(true)}
     >
-      {props.epsLoading ? <CircularProgress /> : <PlaylistPlayIcon />}
+      {props.epsLoading ? (
+        <CircularProgress sx={{ color: "#fff" }} />
+      ) : (
+        <PlaylistPlayIcon />
+      )}
     </StyledFab>
   );
 };

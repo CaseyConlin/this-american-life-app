@@ -22,7 +22,6 @@ export const fetchEpisode = (epNumber: string) => {
         title: res.data.episode_title,
         epDate: res.data.episode_date,
       };
-      console.log(episode.acts);
       return episode;
     });
   return newEpisode;

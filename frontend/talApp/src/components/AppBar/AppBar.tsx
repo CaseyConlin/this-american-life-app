@@ -35,10 +35,15 @@ export default function BottomAppBar(props: NavProps) {
 
       <AppBar
         position="fixed"
-        color="primary"
-        sx={{ top: "auto", bottom: 0, zIndex: "10" }}
+        sx={{
+          top: "auto",
+          bottom: 0,
+          zIndex: "10",
+          bgcolor: "#ea0001",
+          height: "40px",
+        }}
       >
-        <Toolbar>
+        <Toolbar sx={{ bgcolor: "#ea0001", height: "20px" }}>
           {/* <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton> */}

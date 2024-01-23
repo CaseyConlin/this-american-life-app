@@ -29,7 +29,7 @@ export const ActInfoContainer = (props: ActContainerProps) => {
   return (
     <Box>
       <ActDivider actNumber={props.actNumber} />
-      <ListItemButton>
+      <ListItemButton sx={{ padding: 0 }}>
         <ActPlayPauseIcon
           actPlaying={props.actPlaying}
           actNumber={props.actNumber}
@@ -38,19 +38,16 @@ export const ActInfoContainer = (props: ActContainerProps) => {
           actHandler={props.actHandler}
           paused={props.paused}
         />
-
         <EqualizerGraphics
           showEq={props.showEq}
           actPlaying={props.actPlaying}
           actNumber={props.actNumber}
           paused={props.paused}
         />
-
         <ActTitle
           actName={props.actName}
           openDescriptionHandler={openDescriptionHandler}
         />
-
         <ActExpandButton
           open={open}
           openDescriptionHandler={openDescriptionHandler}
