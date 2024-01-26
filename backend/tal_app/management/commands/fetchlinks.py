@@ -10,6 +10,10 @@ from requests_ip_rotator import ApiGateway, EXTRA_REGIONS
 import os
 from dotenv import load_dotenv
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 
 class Command(BaseCommand):
@@ -47,8 +51,10 @@ class Command(BaseCommand):
             endSearch = False
             while endSearch != True:
 
-                AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-                AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+                AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+                AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+                # AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+                # AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
                 gateway = ApiGateway('https://www.thisamericanlife.org', access_key_id= AWS_ACCESS_KEY_ID, access_key_secret=AWS_SECRET_ACCESS_KEY)
                 gateway.start()
