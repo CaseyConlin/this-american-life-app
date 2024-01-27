@@ -17,9 +17,6 @@ class TALView(viewsets.ModelViewSet):
 
 
 
-
-# def index(request):
-#   return render(request, 'public/index.html')
 def serve_react(request, path, document_root=None):
     path = posixpath.normpath(path).lstrip("/")
     fullpath = Path(safe_join(document_root, path))

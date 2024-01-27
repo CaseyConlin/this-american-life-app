@@ -11,9 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
-from dotenv import load_dotenv
-import dotenv
 import environ
 
 env = environ.Env()
@@ -32,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q&og3m80yz&o^w+53(vo3(^fg26sb$p6*@akxixjra@&=^_1e='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.thisamericanlifeapp.parkcrest.dev', 
                  'thisamericanlifeapp.parkcrest.dev', 

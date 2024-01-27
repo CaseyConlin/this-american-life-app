@@ -4,7 +4,6 @@ import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export interface FloatingButtonProps {
-  // openDrawer: React).MouseEventHandler<HTMLButtonElement>;
   action: (open: boolean) => void;
   epsLoading: boolean;
 }
