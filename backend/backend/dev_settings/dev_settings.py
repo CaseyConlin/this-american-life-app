@@ -9,21 +9,21 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
+
 import os
 import environ
-from backend.settings.settings import *
+from backend.settings import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
 environ.Env.read_env(env_file=str(BASE_DIR) + '/.env')    
 
-env = environ.Env()
-environ.Env.read_env()
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['www.thisamericanlifeapp.parkcrest.dev', 
                  'thisamericanlifeapp.parkcrest.dev', 
@@ -42,11 +42,11 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("PROD_DB_NAME"), 
-        'USER': env("PROD_DB_USER"),
-        'PASSWORD': env("PROD_DB_PASSWORD"),
-        'HOST': env('PROD_DB_HOST'),
-        'PORT': env('PROD_DB_PORT'),
+        'NAME': 'dev-tal', 
+        'USER': 'postgres',
+        'PASSWORD': env("DEV_DB_PASSWORD"),
+        'HOST': env('DEV_DB_HOST'),
+        'PORT': env('DEV_DB_PORT'),
     }
 }
 
