@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('DJ_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.thisamericanlifeapp.parkcrest.dev', 
                  'thisamericanlifeapp.parkcrest.dev', 
@@ -95,14 +95,14 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # # }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'dev-tal', 
-    #     'USER': 'postgres',
-    #     'PASSWORD': env("DB_PASSWORD"),
-    #     'HOST': env('DB_HOST'),
-    #     'PORT': env('DB_PORT'),
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("PROD_DB_NAME"), 
+        'USER': env("PROD_DB_USER"),
+        'PASSWORD': env("PROD_DB_PASSWORD"),
+        'HOST': env('PROD_DB_HOST'),
+        'PORT': env('PROD_DB_PORT'),
+    }
 }
 
 
