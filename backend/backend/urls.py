@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from rest_framework import routers
-from todo import views
 from django.views.generic import TemplateView
 from tal_app.views import serve_react
 from django.conf import settings

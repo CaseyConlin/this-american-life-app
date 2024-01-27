@@ -9,12 +9,13 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 import environ
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(env_file=str(BASE_DIR) + '/.env')    
 
 
 
@@ -29,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('DJ_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ['www.thisamericanlifeapp.parkcrest.dev', 
                  'thisamericanlifeapp.parkcrest.dev', 
@@ -93,15 +94,15 @@ DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
+    # # }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'dev-tal', 
+    #     'USER': 'postgres',
+    #     'PASSWORD': env("DB_PASSWORD"),
+    #     'HOST': env('DB_HOST'),
+    #     'PORT': env('DB_PORT'),
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dev-tal', 
-        'USER': 'postgres',
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-    }
 }
 
 
