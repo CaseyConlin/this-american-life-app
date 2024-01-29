@@ -11,7 +11,7 @@ export const ActDescriptionCollapse = (props: ActDescriptionProps) => {
   return (
     <Collapse in={props.open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
-        <ListItemText>{props.summary}</ListItemText>
+        <p dangerouslySetInnerHTML={{ __html: props.summary }} />
       </List>
     </Collapse>
   );
