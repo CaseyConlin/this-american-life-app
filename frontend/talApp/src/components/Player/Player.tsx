@@ -14,18 +14,7 @@ import Forward10RoundedIcon from "@mui/icons-material/Forward10Rounded";
 import Replay10RoundedIcon from "@mui/icons-material/Replay10Rounded";
 import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
 import VolumeDownRounded from "@mui/icons-material/VolumeDownRounded";
-
-// import ListItemText from "@mui/material/ListItemText";
-// import Collapse from "@mui/material/Collapse";
-
-// import ExpandLess from "@mui/icons-material/ExpandLess";
-// import ExpandMore from "@mui/icons-material/ExpandMore";
-
 import icon from "../../assets/talicon.webp";
-
-// import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-// import PauseCircleIcon from "@mui/icons-material/PauseCircle";
-
 import { Grid } from "@mui/material";
 import { CoverImage } from "./CoverImage";
 import { ActInfoContainer } from "./ActInfo/ActInfoContainer";
@@ -39,64 +28,20 @@ const WallPaper = styled("div")({
   left: 0,
   overflow: "hidden",
   background: "#01135b",
-
-  // background: "linear-gradient(rgb(214, 40, 40) 0%, rgb(214, 40, 40) 100%)",
-  // transition: "all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s",
-  // "&::before": {
-  //   content: '""',
-  //   width: "140%",
-  //   height: "140%",
-  //   position: "absolute",
-  //   top: "-40%",
-  //   right: "-50%",
-  //   background:
-  //     "radial-gradient(at center center, rgb(20, 33, 175) 0%, rgba(20, 33, 175, 0) 64%)",
-  // },
-  // "&::after": {
-  //   content: '""',
-  //   width: "140%",
-  //   height: "140%",
-  //   position: "absolute",
-  //   bottom: "-50%",
-  //   left: "-30%",
-  //   background:
-  //     "radial-gradient(at center center, rgb(37, 11, 231) 0%, rgba(37, 11, 231, 0) 70%)",
-  //   transform: "rotate(30deg)",
-  // },
 });
 
-const Widget = styled("div")(({ theme }) => ({
-  padding: 16,
+const Widget = styled("div")(() => ({
+  padding: 8,
   borderRadius: 16,
-  width: "100%",
+  width: "96%",
   maxWidth: "98%",
-  height: "95%",
-  margin: "2.5% auto",
+  maxHeight: "90vh",
+  margin: "1vh auto 1vh",
   position: "relative",
   zIndex: 1,
-  backgroundColor: theme.palette.mode === "dark" ? "rgba(0,0,0,0.6)" : "#fff",
-  backdropFilter: "blur(40px)",
+  backgroundColor: "#fff",
 }));
 
-// const CoverImage = styled("div")({
-//   width: 100,
-//   height: 100,
-//   objectFit: "cover",
-//   overflow: "hidden",
-//   flexShrink: 0,
-//   borderRadius: 8,
-//   backgroundColor: "rgba(0,0,0,0.08)",
-//   "& > img": {
-//     width: "100%",
-//   },
-// });
-
-// const TinyText = styled(Typography)({
-//   fontSize: "0.75rem",
-//   opacity: 0.38,
-//   fontWeight: 500,
-//   letterSpacing: 0.2,
-// });
 export interface Act {
   name: string;
   summary: string;
@@ -115,21 +60,14 @@ export interface EpisodeProps {
 export default function MusicPlayerSlider(props: EpisodeProps) {
   const theme = useTheme();
   const [duration, setDuration] = useState(0);
-
-  // const duration = 200; // seconds
   const [position, setPosition] = useState(0);
   const [paused, setPaused] = useState(true);
   const [volume, setVolume] = useState(50);
   const [actPlaying, setActPlaying] = useState(0);
   const [showEq, setShowEq] = useState(false);
-  // function formatDuration(value: number) {
-  //   const minute = Math.floor(value / 60);
-  //   const secondLeft = value - minute * 60;
-  //   return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-  // }
-  const mainIconColor = theme.palette.mode === "dark" ? "#fff" : "#000";
-  const lightIconColor =
-    theme.palette.mode === "dark" ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.4)";
+
+  const mainIconColor = "#000";
+  const lightIconColor = "rgba(0,0,0,0.4)";
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -139,7 +77,6 @@ export default function MusicPlayerSlider(props: EpisodeProps) {
       setPosition(Math.floor(event.currentTarget.currentTime));
       event.currentTarget.paused ? setPaused(true) : setPaused(false);
     },
-
     [setPosition, props.acts]
   );
 
@@ -150,7 +87,6 @@ export default function MusicPlayerSlider(props: EpisodeProps) {
 
     if (audioRef.current) {
       findAct(props.acts);
-
       audioRef.current.paused
         ? audioRef.current.play()
         : audioRef.current.pause();
@@ -253,37 +189,6 @@ export default function MusicPlayerSlider(props: EpisodeProps) {
   };
   const timeMarks = makeMarks();
 
-  // const onKeyDown = (event: KeyboardEvent) => {
-  //   console.log(event);
-  // };
-
-  // // Listen for the player's physical keyboard events.
-  // useEffect(() => {
-  //   document.addEventListener("keydown", (e) => onKeyDown(e));
-
-  //   return () => {
-  //     document.removeEventListener("keydown", () => onKeyDown);
-  //   };
-  // }, []);
-  //
-  //
-  // [open, setOpen] = useState(false);
-
-  // const handleClick = () => {
-  //   setOpen(!open);
-  // };
-  // const TimeSlider = styled(Slider)(() => ({
-  //   "& .MuiSlider-mark ": {
-  //     borderRadius: 50,
-  //     height: "12px",
-  //     width: "1px",
-  //   },
-
-  //   "& .MuiSlider-mark.MuiSlider-markActive ": {
-  //     backgroundColor: "#000",
-  //   },
-  // }));
-
   return (
     <Grid
       container
@@ -305,12 +210,7 @@ export default function MusicPlayerSlider(props: EpisodeProps) {
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <CoverImage imgSrc={icon} />
-            {/* <CoverImage sx={{ transform: "scaleX(-1)" }}>
-              <img
-                alt="This American Life Flag Speech Bubble Icon"
-                src={icon}
-              />
-            </CoverImage> */}
+
             <Box sx={{ ml: 1.5, minWidth: 0 }}>
               <Typography color="text.secondary" fontWeight={500}>
                 {props.epNum}
@@ -422,21 +322,12 @@ export default function MusicPlayerSlider(props: EpisodeProps) {
             <VolumeUpRounded htmlColor={lightIconColor} />
           </Stack>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box sx={{ ml: 1.5, minWidth: 0 }}>
-              {/* <Typography
-              variant="caption"
-              color="text.secondary"
-              fontWeight={400}
-            >
-              {props.epDate}
-            </Typography>
-            <Typography color="text.secondary" fontWeight={500}>
-              {props.epNum}
-            </Typography>
-            <Typography>
-              <b>{props.title}</b>
-            </Typography> */}
-              <Typography letterSpacing={-0.25} padding={2}>
+            <Box sx={{ minWidth: 0 }}>
+              <Typography
+                textAlign={"center"}
+                letterSpacing={-0.25}
+                padding={1}
+              >
                 {props.desc}
               </Typography>
             </Box>

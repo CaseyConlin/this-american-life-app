@@ -1,21 +1,20 @@
 import "./App.css";
 import MusicPlayerSlider from "./components/Player/Player";
-import BottomAppBar from "./components/AppBar/AppBar";
-import { useState, useEffect } from "react";
-// import axios from "axios";
-import { EpisodeProps } from "./components/Player/Player";
-import SwipeableTemporaryDrawer from "./components/Drawer";
-import { fetchEpisode, fetchEpisodes } from "./Services/episodes";
-// import { ListEpisode } from "./Services/episodes";
 
-// import { DrawerProps } from "./components/Drawer";
+import { useState, useEffect } from "react";
+import { EpisodeProps } from "./components/Player/Player";
+import { fetchEpisode, fetchEpisodes } from "./Services/episodes";
+import ContentDrawer from "./components/AppBar/ContentDrawer";
+import AppDrawer from "./components/AppBar/AppDrawer";
 
 function App() {
   const [episode, setEpisode] = useState<EpisodeProps | undefined>();
   const [episodes, setEpisodes] = useState<EpisodeProps[] | undefined>();
   const [epsLoading, setEpsLoading] = useState(false);
+  const [appDrawerOpen, setAppDrawerOpen] = useState(false);
+  const [showEpisodes, setShowEpisodes] = useState(false);
+  const [epDrawerOpen, setEpDrawerOpen] = useState(false);
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
   // const acts1 = [
   //   {
   //     name: "Prologue",
@@ -43,15 +42,22 @@ function App() {
   //   },
   // ];
 
+  const appDrawerHandler = () => {
+    setAppDrawerOpen(!appDrawerOpen);
+  };
+
+  const showEpisodeHandler = () => {
+    setShowEpisodes(!showEpisodes);
+  };
   const drawerHandler = (open: boolean) => {
     if (open) {
       setEpsLoading(true);
       fetchEpisodes().then((res) => {
         setEpisodes(res);
         setEpsLoading(false);
-        setDrawerOpen(true);
+        setEpDrawerOpen(true);
       });
-    } else setDrawerOpen(false);
+    } else setEpDrawerOpen(false);
     // axios
     //   .get("http://localhost:8000/api/episodes/")
     //   .then((res) => setEpisodes(res.data))
@@ -90,18 +96,8 @@ function App() {
     fetchEpisode(epNum).then((res) => {
       setEpisode(res);
     });
-    // .get(`http://localhost:8000/api/episodes/${epNum}/`)
-    // .then((res) =>
-    //   setEpisode({
-    //     epNum: res.data.episode_num,
-    //     epDate: res.data.episode_date,
-    //     title: res.data.episode_title,
-    //     desc: res.data.episode_descript,
-    //     audio: res.data.episode_audio_url,
-    //     acts: res.data.episode_acts,
-    //   })
-    // );
-    setDrawerOpen(false);
+
+    setEpDrawerOpen(false);
   };
 
   // const episode1 = {
@@ -130,12 +126,21 @@ function App() {
           acts={episode.acts}
         />
       )}
-      <BottomAppBar action={drawerHandler} epsLoading={epsLoading} />
-      <SwipeableTemporaryDrawer
-        openDrawer={drawerHandler}
-        drawerOpen={drawerOpen}
+      {/* <BottomAppBar action={drawerHandler} epsLoading={epsLoading} /> */}
+      <AppDrawer
+        openDrawer={appDrawerHandler}
+        drawerOpen={appDrawerOpen}
+        epsLoading={epsLoading}
+        action={drawerHandler}
+      />
+      <ContentDrawer
+        showEpisodes={showEpisodes}
+        openDrawer={setEpDrawerOpen}
+        drawerOpen={epDrawerOpen}
         episodeList={episodes}
         episodeLoader={playEpisodeHandler}
+        action={drawerHandler}
+        epsLoading={epsLoading}
       />
     </>
   );
