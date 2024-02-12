@@ -5,10 +5,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export interface FloatingButtonProps {
-  action: (open: boolean) => void;
+  getEpisodes?: () => void;
   epsLoading: boolean;
   menu: "episodes" | "auth";
-  openDrawer: (open: boolean) => void;
+  openAppDrawer: (open: boolean) => void;
+  action: (set: "auth" | "episodes" | undefined) => void;
+  contentsLoading: "auth" | "episodes" | undefined;
 }
 
 export const FloatingButton = (props: FloatingButtonProps) => {
@@ -33,18 +35,22 @@ export const FloatingButton = (props: FloatingButtonProps) => {
       filter: "brightness(85%)",
     },
   });
-
   return (
     <StyledFab
       color="secondary"
       aria-label="add"
       sx={{ backgroundColor: "#fff", color: "#02135b" }}
       onClick={() => {
-        props.action(true);
-        props.openDrawer(false);
+        props.action(props.menu);
+        props.openAppDrawer(false);
+        props.getEpisodes && props.getEpisodes();
       }}
     >
-      {props.epsLoading ? <CircularProgress sx={{ color: "#02135b" }} /> : icon}
+      {props.contentsLoading === props.menu ? (
+        <CircularProgress sx={{ color: "#02135b" }} />
+      ) : (
+        icon
+      )}
     </StyledFab>
   );
 };

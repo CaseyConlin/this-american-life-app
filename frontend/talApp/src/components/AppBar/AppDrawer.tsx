@@ -6,17 +6,19 @@ import { EpisodeProps } from "../Player/Player";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ListItemButton from "@mui/material/ListItemButton";
-import { DrawerItem } from "./DrawerItem";
+import { DrawerItem } from "../ContentDrawer/Episodes/DrawerItem";
 import Typography from "@mui/material/Typography";
-import { DrawerEpisodeList } from "./DrawerEpisodeList";
-import BottomAppBar from "./AppBar";
+import { DrawerEpisodeList } from "../ContentDrawer/Episodes/DrawerEpisodeList";
+import BottomAppBar from "./BottomAppBar";
 import { IconButton } from "@mui/material";
 
 export interface DrawerProps {
   drawerOpen: boolean;
-  openDrawer: (open: boolean) => void;
-  action: (open: boolean) => void;
+  openAppDrawer: (open: boolean) => void;
+  getEpisodes: () => void;
+  contentsLoading: "auth" | "episodes" | undefined;
   epsLoading: boolean;
+  setDrawerContents: (set: "auth" | "episodes" | undefined) => void;
 }
 
 // type Anchor = "top" | "left" | "bottom" | "right";
@@ -60,7 +62,7 @@ export default function AppDrawer(props: DrawerProps) {
       >
         <IconButton
           sx={{ top: 0, color: "#fff" }}
-          onClick={() => props.openDrawer(!props.drawerOpen)}
+          onClick={() => props.openAppDrawer(!props.drawerOpen)}
         >
           <ArrowDropUpIcon fontSize="large" />
         </IconButton>
@@ -68,8 +70,8 @@ export default function AppDrawer(props: DrawerProps) {
           sx={{ width: "50%", height: props.drawerOpen ? "100vh" : "5vh" }}
           anchor={"bottom"}
           open={props.drawerOpen}
-          onClose={() => props.openDrawer(false)}
-          onOpen={() => props.openDrawer(true)}
+          onClose={() => props.openAppDrawer(false)}
+          onOpen={() => props.openAppDrawer(true)}
           PaperProps={{
             sx: {
               width: "100vw",
@@ -78,7 +80,6 @@ export default function AppDrawer(props: DrawerProps) {
             },
           }}
         >
-          {" "}
           <List
             sx={{
               width: "100vw",
@@ -95,14 +96,16 @@ export default function AppDrawer(props: DrawerProps) {
           >
             <DrawerItemButton
               divider={true}
-              onClick={() => props.openDrawer(false)}
+              onClick={() => props.openAppDrawer(false)}
             >
               <ArrowDropDownIcon />
             </DrawerItemButton>
             <BottomAppBar
-              action={props.action}
+              setDrawerContents={props.setDrawerContents}
+              getEpisodes={props.getEpisodes}
               epsLoading={props.epsLoading}
-              openDrawer={props.openDrawer}
+              openAppDrawer={props.openAppDrawer}
+              contentsLoading={props.contentsLoading}
             />
           </List>
         </SwipeableDrawer>

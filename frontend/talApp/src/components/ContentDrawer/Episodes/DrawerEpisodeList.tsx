@@ -3,7 +3,7 @@ import { DrawerItem } from "./DrawerItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-import { EpisodeProps } from "../Player/Player";
+import { EpisodeProps } from "../../Player/Player";
 
 export interface DrawerProps {
   episodeList: EpisodeProps[] | undefined;

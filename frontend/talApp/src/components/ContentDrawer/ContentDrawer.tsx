@@ -6,20 +6,26 @@ import { EpisodeProps } from "../Player/Player";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ListItemButton from "@mui/material/ListItemButton";
-import { DrawerItem } from "./DrawerItem";
+import { DrawerItem } from "./Episodes/DrawerItem";
 import Typography from "@mui/material/Typography";
-import { DrawerEpisodeList } from "./DrawerEpisodeList";
-import BottomAppBar from "./AppBar";
+import { DrawerEpisodeList } from "./Episodes/DrawerEpisodeList";
+import BottomAppBar from "../AppBar/BottomAppBar";
 import { IconButton } from "@mui/material";
+import SignUp from "./Auth/Singup";
+import { AuthForm } from "./Auth/AuthForm";
 
 export interface DrawerProps {
-  drawerOpen: boolean;
-  openDrawer: (open: boolean) => void;
+  // drawerOpen: boolean;
+  user: boolean;
+  openDrawer: () => void;
   episodeList: EpisodeProps[] | undefined;
   episodeLoader: (epNum: string) => void;
   action: (open: boolean) => void;
   epsLoading: boolean;
-  showEpisodes: boolean;
+  setDrawerContents: (set: "auth" | "episodes" | undefined) => void;
+
+  // showEpisodes: boolean;
+  drawerContents: "auth" | "episodes" | undefined;
 }
 
 // type Anchor = "top" | "left" | "bottom" | "right";
@@ -41,15 +47,16 @@ export default function ContentDrawer(props: DrawerProps) {
       filter: "brightness(120%)",
     },
   }));
+  console.log("ddkd", props.drawerContents);
 
   return (
     <div>
       <SwipeableDrawer
-        sx={{ width: "50%", height: props.drawerOpen ? "100vh" : "5vh" }}
+        sx={{ width: "50%", height: props.drawerContents ? "100vh" : "5vh" }}
         anchor={"bottom"}
-        open={props.drawerOpen}
-        onClose={() => props.openDrawer(false)}
-        onOpen={() => props.openDrawer(true)}
+        open={props.drawerContents != undefined}
+        onClose={() => props.setDrawerContents(undefined)}
+        onOpen={() => {}}
         PaperProps={{
           sx: {
             width: "100vw",
@@ -58,7 +65,6 @@ export default function ContentDrawer(props: DrawerProps) {
           },
         }}
       >
-        {" "}
         <List
           sx={{
             width: "100vw",
@@ -67,6 +73,7 @@ export default function ContentDrawer(props: DrawerProps) {
             bgcolor: "background.paper",
             position: "relative",
             overflow: "auto",
+            height: props.drawerContents == "episodes" ? "95vh" : "90vh",
             maxHeight: "95vh",
             "& ul": {},
             m: 0,
@@ -75,14 +82,17 @@ export default function ContentDrawer(props: DrawerProps) {
         >
           <DrawerItemButton
             divider={true}
-            onClick={() => props.openDrawer(false)}
+            onClick={() => props.setDrawerContents(undefined)}
           >
             <ArrowDropDownIcon />
           </DrawerItemButton>
-          <DrawerEpisodeList
-            episodeList={props.episodeList}
-            episodeLoader={props.episodeLoader}
-          />
+          {props.drawerContents === "episodes" && (
+            <DrawerEpisodeList
+              episodeList={props.episodeList}
+              episodeLoader={props.episodeLoader}
+            />
+          )}
+          {props.drawerContents === "auth" && <AuthForm user={props.user} />}
         </List>
       </SwipeableDrawer>
     </div>

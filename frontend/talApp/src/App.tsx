@@ -4,8 +4,9 @@ import MusicPlayerSlider from "./components/Player/Player";
 import { useState, useEffect } from "react";
 import { EpisodeProps } from "./components/Player/Player";
 import { fetchEpisode, fetchEpisodes } from "./Services/episodes";
-import ContentDrawer from "./components/AppBar/ContentDrawer";
+import ContentDrawer from "./components/ContentDrawer/ContentDrawer";
 import AppDrawer from "./components/AppBar/AppDrawer";
+import SignUp from "./components/ContentDrawer/Auth/Singup";
 
 function App() {
   const [episode, setEpisode] = useState<EpisodeProps | undefined>();
@@ -13,7 +14,15 @@ function App() {
   const [epsLoading, setEpsLoading] = useState(false);
   const [appDrawerOpen, setAppDrawerOpen] = useState(false);
   const [showEpisodes, setShowEpisodes] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [epDrawerOpen, setEpDrawerOpen] = useState(false);
+  const [drawerContents, setDrawerContents] = useState<
+    "auth" | "episodes" | undefined
+  >(undefined);
+  const [contentLoading, setContentLoading] = useState<
+    "auth" | "episodes" | undefined
+  >(undefined);
+  const [user, setUser] = useState(true);
 
   // const acts1 = [
   //   {
@@ -49,15 +58,19 @@ function App() {
   const showEpisodeHandler = () => {
     setShowEpisodes(!showEpisodes);
   };
-  const drawerHandler = (open: boolean) => {
-    if (open) {
-      setEpsLoading(true);
-      fetchEpisodes().then((res) => {
-        setEpisodes(res);
-        setEpsLoading(false);
-        setEpDrawerOpen(true);
-      });
-    } else setEpDrawerOpen(false);
+  const drawerHandler = () => {
+    // if (open) {
+    // setEpsLoading(true);
+    setContentLoading("episodes");
+    fetchEpisodes().then((res) => {
+      setEpisodes(res);
+      // setEpsLoading(false);
+      setContentLoading(undefined);
+
+      // setEpDrawerOpen(true);
+      // console.log(episodes);
+    });
+    // } else setEpDrawerOpen(false);
     // axios
     //   .get("http://localhost:8000/api/episodes/")
     //   .then((res) => setEpisodes(res.data))
@@ -128,19 +141,26 @@ function App() {
       )}
       {/* <BottomAppBar action={drawerHandler} epsLoading={epsLoading} /> */}
       <AppDrawer
-        openDrawer={appDrawerHandler}
+        openAppDrawer={appDrawerHandler}
         drawerOpen={appDrawerOpen}
         epsLoading={epsLoading}
-        action={drawerHandler}
+        getEpisodes={drawerHandler}
+        contentsLoading={contentLoading}
+        setDrawerContents={setDrawerContents}
       />
       <ContentDrawer
-        showEpisodes={showEpisodes}
-        openDrawer={setEpDrawerOpen}
-        drawerOpen={epDrawerOpen}
+        // showEpisodes={showEpisodes}
+        // showAuth={showAuth}
+
+        drawerContents={drawerContents}
+        openDrawer={drawerHandler}
+        // drawerOpen={epDrawerOpen}
+        setDrawerContents={setDrawerContents}
         episodeList={episodes}
         episodeLoader={playEpisodeHandler}
         action={drawerHandler}
         epsLoading={epsLoading}
+        user={user}
       />
     </>
   );
